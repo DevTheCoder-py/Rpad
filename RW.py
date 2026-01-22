@@ -2,6 +2,7 @@ import json
 import os
 import curses
 import time
+import sys
 from utils import *
 RED = "\033[31m"
 RESET = "\033[0m"
@@ -29,7 +30,9 @@ def RW(mode, notes):
                         print(f"{RED}{line_num}{RESET}: {text}")
 
                     input("press enter to return")
-                    AskUser()# exit after successful read
+                    AskUser()# exit after success
+                    print("Bye!")
+                    sys.exit()
 
                 except ValueError:
                     print("Please enter a valid number.")
@@ -45,6 +48,8 @@ def RW(mode, notes):
 
                 except Exception as e:
                     print(f"Unexpected error: {e}")
+                except KeyboardInterrupt:
+                    print("bye!")
     elif mode == "W":
         Write(notes)
 

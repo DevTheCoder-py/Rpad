@@ -1,3 +1,4 @@
+
 import json
 import os
 import time
@@ -5,15 +6,18 @@ RED = "\033[31m"
 RESET = "\033[0m"
 
 def AskUser():
-    clear_screen()
-    mode = input("Notepad Mode?\n R or W;\n")
-    if mode == "R" or mode == "W":
-        return mode
-    else:
-        print("Please input valid mode")
+    try:
         clear_screen()
-        time.sleep(1)
-        AskUser()
+        mode = input("Notepad Mode?\n R or W;\n")
+        if mode == "R" or mode == "W":
+            return mode
+        else:
+            print("Please input valid mode")
+            clear_screen()
+            time.sleep(1)
+            AskUser()
+    except KeyboardInterrupt:
+        print("Closing!")
 
 def uploadNote(file_path, nt):
     with open(file_path, "w") as f:
