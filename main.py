@@ -1,8 +1,9 @@
 import json
 import os
 import time
-import curser
+import curses
 from utils import *
+from RW import *
 FP = "data.json"
 #Colors
 RED = "\033[31m"
@@ -22,15 +23,6 @@ else:
     notes = []
 
 
-def AskUser():
-    mode = input("Notepad Mode?\n R or W;\n")
-    if mode == "R" or mode == "W":
-        return mode
-    else:
-        print("Please input valid mode")
-        clear_screen()
-        time.sleep(1)
-        AskUser()
 clear_screen()
 mode = AskUser()
 notes = loadNote(FP)
