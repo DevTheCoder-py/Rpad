@@ -1,23 +1,25 @@
-
+from RW import *
 import json
 import os
 import time
 RED = "\033[31m"
 RESET = "\033[0m"
-
 def AskUser():
-    try:
-        clear_screen()
-        mode = input("Notepad Mode?\n R or W;\n")
-        if mode == "R" or mode == "W":
-            return mode
-        else:
-            print("Please input valid mode")
+    while True:
+        try:
             clear_screen()
-            time.sleep(1)
-            AskUser()
-    except KeyboardInterrupt:
-        print("Closing!")
+            mode = input("Notepad Mode?\n R, W or Q to quit;\n")
+            if mode.upper() in ["R", "W"]:
+                return mode
+            elif mode.upper() == "Q":
+                print("Exiting...")
+                exit(0)
+            else:
+                print("Please input a valid mode")
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print("Closing!")
+            exit(0)
 
 def uploadNote(file_path, nt):
     with open(file_path, "w") as f:
@@ -33,4 +35,10 @@ def clear_screen():
 def loadNote(file_path):
     with open(file_path, "r") as f:
         return json.load(f)
+def mainScr(FP):
+    while True:
+        clear_screen()
+        mode = AskUser()
+        notes = loadNote(FP)
+        RW(mode, notes, FP)
 

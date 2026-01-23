@@ -7,6 +7,7 @@ import signal
 import sys
 from utils import *
 from RW import *
+global FP
 FP = "./data.json"
 RED = "\033[31m"
 RESET = "\033[0m"
@@ -27,15 +28,13 @@ sample_note = {
         "2": "yor"
     }
 }
-if os.path.exists(FP):
+if not os.path.exists(FP):
+    with open(FP, "w") as f:
+        json.dump([], f)
+    notes = []
+else:
     with open(FP, "r") as f:
         notes = json.load(f)
-else:
-    notes = []
 
-
-clear_screen()
-mode = AskUser()
-notes = loadNote(FP)
-RW(mode, notes)
+mainScr(FP)
 #todo planning to use stdscr to make nano like text editor
