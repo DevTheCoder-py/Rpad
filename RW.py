@@ -60,7 +60,10 @@ def Write(notes, FP):
         if nn.upper() == "Q":
             return
         nn = int(nn)
-        note = notes[nn - 1]
+        if nn <= len(notes):
+            note = notes[nn - 1]
+        else:
+            note = {"title": f"Note{nn}", "lines":{}}
 
     except (ValueError, IndexError) as e:
         print(f"Invalid input: {e}")
@@ -78,7 +81,7 @@ def Write(notes, FP):
         x = 0
         
         while True:
-            HEADER_LINES = 2
+            HEADER_LINES = 3
             stdscr.clear()
             h, w = stdscr.getmaxyx()
             h, w = h-1, w-1
@@ -86,8 +89,9 @@ def Write(notes, FP):
             curses.use_default_colors()
             curses.init_pair(1, curses.COLOR_RED, -1)  # Red text, default background
             curses.init_pair(2, curses.COLOR_GREEN, -1)
-            stdscr.addstr(0, 0, "RPAD - Press Ctrl+D to save", curses.color_pair(1))
+            stdscr.addstr(0, 0, "RPAD - Press Ctrl+D to save and exit", curses.color_pair(1))
             stdscr.addstr(1, 0, "Use arrow keys to navigate", curses.color_pair(2))  # second line of info
+            stdscr.addstr(2,0, f"Title: {note['title']}")
             available_width = w - 4 - 1
             # Display lines
             # Display lines
