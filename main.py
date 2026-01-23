@@ -7,7 +7,7 @@ import signal
 import sys
 from utils import *
 from RW import *
-FP = "/home/raihan/rpad/data.json"
+FP = "./data.json"
 RED = "\033[31m"
 RESET = "\033[0m"
 
