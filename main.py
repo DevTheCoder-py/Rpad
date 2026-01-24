@@ -5,6 +5,7 @@ import time
 import curses
 import signal
 import sys
+import subprocess
 from utils import *
 from RW import *
 global FP
@@ -15,6 +16,11 @@ RESET = "\033[0m"
 #Colors
 def handle_sigint(sig, frame):
     print(f"\n{RED}Exiting…")  # clean message
+    if not os.name == "nt":
+        user_shell = os.environ.get("SHELL")
+        if user_shell:    
+            subprocess.run([user_shell])
+
     sys.exit(0)
 
 # Catch Ctrl+C everywhere
