@@ -9,7 +9,7 @@ def AskUser():
         try:
             clear_screen()
             mode = input("Notepad Mode?\n R, W or Q to quit;\n")
-            if mode.upper() in ["R", "W"]:
+            if mode.upper() in ["R", "W", "LS", "LIST"]:
                 return mode
             elif mode.upper() == "Q":
                 print("Exiting...")

@@ -8,6 +8,7 @@ RED = "\033[31m"
 RESET = "\033[0m"
 
 def RW(mode, notes, FP):
+    from utils import clear_screen
     if mode.upper() == "R":
         if not notes:
             print("No notes available.")
@@ -47,6 +48,13 @@ def RW(mode, notes, FP):
                     print(f"Unexpected error: {e}")
     elif mode.upper() == "W":
         Write(notes, FP)
+    elif "ls" == mode.lower() or "list" == mode.lower():
+        clear_screen()
+        print("i")
+        for i in range(len(notes)):
+            print(f"{i+1}: {notes[i]["title"]}")
+            input(f"{RED}press enter to continue{RESET}")
+
     else:
         print("mode error")
 
