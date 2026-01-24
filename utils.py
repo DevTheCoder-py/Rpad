@@ -2,12 +2,14 @@ from RW import *
 import json
 import os
 import time
+import config
 RED = "\033[31m"
 RESET = "\033[0m"
 def AskUser():
     while True:
         try:
             clear_screen()
+            print(f"{RED}{config.LOGO}{RESET}")
             mode = input("Notepad Mode?\n R, W or Q to quit;\n")
             if mode.upper() in ["R", "W", "LS", "LIST"]:
                 return mode
