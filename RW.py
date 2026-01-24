@@ -6,7 +6,8 @@ import sys
 from utils import *
 RED = "\033[31m"
 RESET = "\033[0m"
-
+GREEN = "\033[0;32m"
+BLUE = "\033[0;34m"
 def RW(mode, notes, FP):
     from utils import clear_screen
     if mode.upper() == "R":
@@ -50,11 +51,12 @@ def RW(mode, notes, FP):
         Write(notes, FP)
     elif "ls" == mode.lower() or "list" == mode.lower():
         clear_screen()
-        print("i")
+        print("")
         for i in range(len(notes)):
-            print(f"{i+1}: {notes[i]["title"]}")
-            input(f"{RED}press enter to continue{RESET}")
-
+            print(f"{RED}Number: {GREEN}Title:")
+            print(f"{RED}     {i+1}:   {RESET}{notes[i]["title"]}")
+        input(f"{BLUE}press enter to continue{RESET}")
+        
     else:
         print("mode error")
 
@@ -68,10 +70,11 @@ def Write(notes, FP):
         if nn.upper() == "Q":
             return
         nn = int(nn)
-        if nn <= len(notes):
+        is_new_note = nn > len(notes)
+        if not is_new_note:
             note = notes[nn - 1]
         else:
-            note = {"title": f"Note{nn}", "lines":{}}
+            note = {"title": f"Note{nn}", "lines": {}}
 
     except (ValueError, IndexError) as e:
         print(f"Invalid input: {e}")
@@ -150,6 +153,8 @@ def Write(notes, FP):
                 break
     
     curses.wrapper(sub)
+    if is_new_note:
+        notes.append(note)
     uploadNote(FP, notes)
     
     
