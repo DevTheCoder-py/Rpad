@@ -101,7 +101,7 @@ def Write(notes, FP):
                     stdscr.addstr(i + HEADER_LINES, 0, line_num_str, curses.color_pair(1))
                     stdscr.addstr(i + HEADER_LINES, len(line_num_str), line[:available_width])
 
-            stdscr.move(y + HEADER_LINES, x+4) # for x maybe add 4 later for line num width
+            stdscr.move(y + HEADER_LINES, x+5) # for x maybe add 4 later for line num width
             stdscr.refresh()
 
             key = stdscr.getch()
@@ -130,7 +130,7 @@ def Write(notes, FP):
                 x = 0
             elif 32 <= key <= 126:
                 if x < available_width:
-                    edit_lines[y] = edit_lines[y][:x] + chr(key) + edit_lines[y][x:]
+                    edit_lines[y] = edit_lines[y][:x] + chr(key) + edit_lines[y][x:] # text before curses + key + text after cursor
                     x += 1
             elif key == 4:
                 # Save changes back to note
