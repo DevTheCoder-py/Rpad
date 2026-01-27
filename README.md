@@ -2,5 +2,4 @@
 
 ## Feautures
 
-    - horrible notepad
-    - why would you use this
+    - very simple notepad utilising curses python library and json to store data
